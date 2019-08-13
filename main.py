@@ -14,9 +14,15 @@ clock = pygame.time.Clock()
 
 all_sprites = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
+mobs = pygame.sprite.Group()
+
 player = Player()
 all_sprites.add(player)
 
+for i in range(8):
+    m = Mob()
+    all_sprites.add(m)
+    mobs.add(m)
 
 # Game loop
 running = True
@@ -34,6 +40,11 @@ while running:
     # Update
     all_sprites.update()
 
+    hits = pygame.sprite.groupcollide(mobs, bullets, True, True)
+    for hit in hits:
+        m = Mob()
+        all_sprites.add(m)
+        mobs.add(m)
  
 
     # Draw / render
