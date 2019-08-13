@@ -14,7 +14,7 @@ class Mob(pygame.sprite.Sprite):
         self.speedx = 5
 
     def update(self):
-        print("updated")
+        self.rect.x = self.rect.x
         # self.rect.x += self.speedx
         # self.rect.y += self.speedy
         # if self.rect.top > HEIGHT + 10 or self.rect.left < -25 or self.rect.right > WIDTH + 20:

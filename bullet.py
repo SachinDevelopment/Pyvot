@@ -8,8 +8,6 @@ class Bullet(pygame.sprite.Sprite):
         self.image = pygame.Surface((30, 30))
         self.image.fill(YELLOW)
         self.rect = self.image.get_rect()
-        print(y)
-        print(x)
         self.rect.x = x + 30
         self.rect.y = y + 30
         self.speedy = 10

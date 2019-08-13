@@ -46,10 +46,15 @@ while running:
         all_sprites.add(m)
         mobs.add(m)
  
+    # check to see if a mob hit the player
+    hits = pygame.sprite.spritecollide(player, mobs, False)
+    if hits:
+        player.health-=10
 
     # Draw / render
     screen.fill(BLACK)
     all_sprites.draw(screen)
+    player.draw_health()
     # *after* drawing everything, flip the display
     pygame.display.flip()
 

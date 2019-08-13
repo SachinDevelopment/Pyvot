@@ -15,8 +15,7 @@ class Player(pygame.sprite.Sprite):
         self.velocity = 8
         self.isJumping = 0
         self.mass = 3
-        print(self.rect.x)
-        print(self.rect.y)
+        self.health = 100
 
     def update(self):
         self.speedx = 0
@@ -26,7 +25,6 @@ class Player(pygame.sprite.Sprite):
         if keystate[pygame.K_d]:
             self.speedx = 8
         if keystate[pygame.K_SPACE]:
-            print('moving up')
             self.isJumping = 1
         self.rect.x += self.speedx
         if self.rect.right > WIDTH:
@@ -34,6 +32,7 @@ class Player(pygame.sprite.Sprite):
         if self.rect.left < 0:
             self.rect.left = 0
         self.playerJump()
+        self.draw_health()
 
     def playerJump(self):   
         #calc force
@@ -48,14 +47,26 @@ class Player(pygame.sprite.Sprite):
         
             #change velocity
             self.velocity-=1
-            print(self.velocity)
         
             #Checking is ground has been reached
             if(self.rect.y >= 490):
                 self.isJumping = 0
                 self.velocity = 8
-                print('jump set to 0')
-     
+
+    def draw_health(self):
+        if self.health > 66:
+            col = (0,255,0)
+        elif self.health > 33:
+            col = (255,255,0)
+        else:
+            col = (255,0,0)
+        width = int(self.rect.width * self.health / 100)
+        print(self.health)
+        self.health_bar = pygame.Rect(0, 0, width, 7)
+        if self.health <= 100:
+            pygame.draw.rect(self.image, col, self.health_bar)
+
+
     def shoot(self,all_sprites,bullets):
         bullet = Bullet(self.rect.x, self.rect.y)
         all_sprites.add(bullet)
