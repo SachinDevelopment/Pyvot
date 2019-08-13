@@ -1,0 +1,8 @@
+To run the game, run main.py
+
+    # # check to see if a mob hit the player
+    # hits = pygame.sprite.spritecollide(player, mobs, False)
+    # if hits:
+    #     running = False
+
+
