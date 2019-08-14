@@ -5,7 +5,7 @@ from configs import *
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface((30, 30))
+        self.image = pygame.Surface((5, 10))
         self.image.fill(YELLOW)
         self.rect = self.image.get_rect()
         self.rect.x = x + 30

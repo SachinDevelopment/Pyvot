@@ -1,5 +1,5 @@
-WIDTH = 480
-HEIGHT = 600
+WIDTH = 1080
+HEIGHT = 720
 FPS = 60
 TITLE = "PYVOT"
 # define colors

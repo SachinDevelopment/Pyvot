@@ -7,9 +7,9 @@ class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.Surface((50, 100))
-        self.image.fill(GREEN)
+        self.image.fill(WHITE)
         self.rect = self.image.get_rect()
-        self.rect.centerx = WIDTH / 2
+        self.rect.centerx = WIDTH / 8
         self.rect.bottom = HEIGHT - 10
         self.speedx = 0
         self.velocity = 8
@@ -32,7 +32,7 @@ class Player(pygame.sprite.Sprite):
         if self.rect.left < 0:
             self.rect.left = 0
         self.playerJump()
-        self.draw_health()
+        self.draw()
 
     def playerJump(self):   
         #calc force
@@ -49,23 +49,21 @@ class Player(pygame.sprite.Sprite):
             self.velocity-=1
         
             #Checking is ground has been reached
-            if(self.rect.y >= 490):
+            if(self.rect.y >= 600):
+                self.rect.y = 600
                 self.isJumping = 0
                 self.velocity = 8
 
     def draw_health(self):
-        if self.health > 66:
-            col = (0,255,0)
-        elif self.health > 33:
-            col = (255,255,0)
-        else:
-            col = (255,0,0)
         width = int(self.rect.width * self.health / 100)
-        print(self.health)
+        width_full = int(self.rect.width)
         self.health_bar = pygame.Rect(0, 0, width, 7)
-        if self.health <= 100:
-            pygame.draw.rect(self.image, col, self.health_bar)
-
+        self.health_bar_full = pygame.Rect(0, 0, width_full, 7)
+        pygame.draw.rect(self.image, (255,0,0), self.health_bar_full)
+        pygame.draw.rect(self.image, (0,255,0), self.health_bar)
+    
+    def draw(self):
+        self.draw_health()
 
     def shoot(self,all_sprites,bullets):
         bullet = Bullet(self.rect.x, self.rect.y)
