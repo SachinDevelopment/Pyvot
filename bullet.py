@@ -8,15 +8,18 @@ class Bullet(pygame.sprite.Sprite):
         self.image = pygame.Surface((5, 10))
         self.image.fill(YELLOW)
         self.rect = self.image.get_rect()
+        print(pygame.mouse.get_pos())
+        print(x,y)
+        x2,y2 = pygame.mouse.get_pos()
         self.rect.x = x + 30
         self.rect.y = y + 30
-        self.speedy = 10
-
+        self.speedx = 10
+        #self.speedy = 30
+    
     def update(self):
-        self.rect.x += self.speedy
-        #print(self.rect.x)
-        #print(self.rect.y)
-        # kill if it moves off the top of the screen
+
+        self.rect.x += self.speedx
+        #self.rect.y -= self.speedy
         if self.rect.x > WIDTH:
             #print("killed")
             self.kill()

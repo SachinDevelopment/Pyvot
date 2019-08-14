@@ -8,7 +8,6 @@ from configs import *
 # initialize pygame and create window
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-bg = pygame.image.load('Images\sunset.jpg')
 pygame.display.set_caption(TITLE)
 clock = pygame.time.Clock()
 
@@ -20,7 +19,8 @@ mobs = pygame.sprite.Group()
 player = Player()
 all_sprites.add(player)
 
-for i in range(12):
+
+for i in range(1):
     m = Mob()
     all_sprites.add(m)
     mobs.add(m)
@@ -41,15 +41,22 @@ while running:
     # Update
     all_sprites.update()
 
+    #check for mob and bullet collision. If mob dies spawn a new one and add to sprite group
+    #also now checking for out of bounds
     for mob in mobs:
+        if(mob.isOutOfBounds()):
+            m = Mob()
+            all_sprites.add(m)
+            mobs.add(m)
+
         hits = pygame.sprite.spritecollide(mob, bullets, True)
         if hits:
-            mob.health-=10
-            if(mob.health <= 0):
-                mob.kill()
+            mob.takeDamage()
+            if(mob.isDead()):
                 m = Mob()
                 all_sprites.add(m)
                 mobs.add(m)
+
  
     # check to see if a mob hit the player
     hits = pygame.sprite.spritecollide(player, mobs, False)
@@ -59,7 +66,7 @@ while running:
     # Draw / render
     screen.fill(BLACK)
     all_sprites.draw(screen)
-    # *after* drawing everything, flip the display
+    #update the display
     pygame.display.flip()
 
 pygame.quit()
